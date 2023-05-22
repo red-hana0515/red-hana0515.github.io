@@ -35,18 +35,92 @@
 									<header class="main">
 									</header>
 
-									<span class="image main"><img src="media/personals/mafiagame.jpg" alt="" /></span>
+									<span class="image main"><img src="media/projects/10k_deep_banner.gif" alt="" /></span>
 									
-									<h2>Basic Description</h2>
+									<h2 id="content">Introduction</h2>
+										<p>A team-of-7 game project about managing resources to upgrade a diver of NaMSA's submarine and dive deeper to the bottom of the mariana trench. 
+											Created within 3-4 months, I was tasked as one of the generalist programmers.</p>
+										<br>
+										<div class="row">
+											<div class="col-3 col-12-medium">
+												<h3>Platform</h3>
+												<p>Windows</p>
+											</div>
+											<div class="col-3 col-12-medium">
+												<h3>Engine</h3>
+												<p>Unity2D</p>
+											</div>
+											<div class="col-3 col-12-medium">
+												<h3>Genre</h3>
+												<ul>
+													<li>Action-Adventure</li>
+													<li>Resource Management</li>
+												</ul>
+											</div>
+											<div class="col-3 col-12-medium">
+												<h3>Official Site</h3>
+												<p><a href="https://uowmgames.itch.io/10000-meters-deep" target="_blank"> Direct link to game site</a></p>
+											</div>
+										</div>
 
-									<p><b>GENRE:</b> Action-Adventure, Resource Management</p>
-									<p><b>PLATFORM:</b> Windows </p>
-									<p><b>OFFICIAL GAME PAGE: </b>
-									<a href="https://uowmgames.itch.io/10000-meters-deep" target="_blank" > Direct link to the game demo</a>
 									<hr class="major" />
 
-									<h2>Introduction</h2>
-									<p>My first personal game project! 
+									<h2>My Assigned Tasks</h2>
+									<ul>
+										<li>Programmed a progressive oxygen tank mechanic. 
+											Similar to a timer countdown feature, every second invoked while players are in the depths of the ocean will slowly decrease the oxygen amount. 
+											Once it reaches zero, the submarine will take damage and must swim back to the surface.
+											The variables used are player prefs to sustain the current numbers for both oxygen and submarine health in all scenes.
+											As the upgradable items are scriptable objects, these code blocks were written to compliment the variables in said scriptable object.
+										</li>
+										<br>
+										<div class="box alt">
+											<div class="row gtr-50 gtr-uniform">
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/10k_tank.gif" alt="" /></span></div>
+											</div>
+										</div>
+										<br>
+										<pre><code>if (PlayerPrefs.GetFloat("oxygenSupply") > 0)
+{
+	oxygenSupply = PlayerPrefs.GetFloat("oxygenSupply");
+}
+
+if (oxygenSupply > 0)
+{
+	InvokeRepeating("TankFall", oxygenDepletionRate, oxygenDepletionRate);
+}
+										</code></pre>
+										<pre><code>void TankFall()
+{
+	oxygenSupply -= oxygenDepletionAmount;
+}
+.... // event commands related to an upgradable item
+										</code></pre>
+										<br>
+										<li>
+											Also similarly to a timer mechanic, a day counter is implemented for players to keep track on the number of days left before reaching the main objective.
+											The counter will increase the number from each trigger of the player's submarine when entering the research outpost. 
+											Players can view the day counter on both the outpost and the pause menu. 
+										</li>
+										<br>
+										<div class="box alt">
+											<div class="row gtr-50 gtr-uniform">
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/10k_daycounter_outpost.jpg" alt="" /></span></div>
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/10k_daycounter_pause.jpg" alt="" /></span></div>
+											</div>
+										</div>
+										<br>
+										<li>
+											I was also tasked to program a simple dialogue system for players to communicate with the lead researcher, Liam, in the research outpost.
+											Specific days will trigger different dialogues and choices will provide to view Liam's responses.
+										</li>
+										<br>
+										<div class="box alt">
+											<div class="row gtr-50 gtr-uniform">
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/10k_dialogue.gif" alt="" /></span></div>
+											</div>
+										</div>
+									</ul>
 								</section>
 
 						</div>
@@ -81,9 +155,7 @@
 										<li>
 											<span class="opener">Personals</span>
 											<ul>
-												<li><a href="lucid_horror.html">LUCID DREAM HORROR</a></li>
 												<li><a href="banjir_buddy.html">BANIJR BUDDY</a></li>
-												<li><a href="renpy_prac.html">RENPY PRACTICE</a></li>
 												<li><a href="mafia.html">WHO IS THE ONE</a></li>
 												
 											</ul>

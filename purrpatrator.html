@@ -35,19 +35,97 @@
 									<header class="main">
 									</header>
 
-									<span class="image main"><img src="media/personals/renpy.gif" alt="" /></span>
+									<span class="image main"><img src="media/projects/purr_banner.gif" alt="" /></span>
 									
-									<h2>Basic Description</h2>
-									
-									<p><b>GENRE:</b> _____ </p>
-									<p><b>PLATFORM:</b> _____ </p>
-									
-
+									<h2 id="content">Introduction</h2>
+									<p>A team-of-10 game project about a competitive multiplayer between a human child and a cat.  
+										Created within 3-4 months, I was tasked as one of the gameplay mechanic programmers.</p>
+										<br>
+										<div class="row">
+											<div class="col-3 col-12-medium">
+												<h3>Platform</h3>
+												<p>Android</p>
+											</div>
+											<div class="col-3 col-12-medium">
+												<h3>Engine</h3>
+												<p>Unity3D, Photon</p>
+											</div>
+											<div class="col-3 col-12-medium">
+												<h3>Genre</h3>
+												<p>Multiplayer</p>
+											</div>
+											<div class="col-3 col-12-medium">
+												<h3>Official Site</h3>
+												<p><a href="https://uowmgames.itch.io/purrpatrator" target="_blank"> Direct link to game site</a></p>
+											</div>
+										</div>
 									<hr class="major" />
 
-									<h2>Introduction</h2>
-									<p>A study practice into understanding the mechanics of RenPY. I've been meaning to start a mini project of a visual novel and using <a href="mafia.html">"Who Is The One"</a>'s project is a startup to learning them!</p>
-									<p></p>
+									<h2>My Assigned Tasks</h2>
+									<ul>
+										<li>As the game has two playable characters, I programmed the human child's fixing furniture mechanic. It's quite similar to the cat's breaking furniture but instead, switched to spawn the original object. </li>
+										<br>
+										<pre><code>[PunRPC]
+public void SpawnDefaultVersion()
+{
+	if (PhotonNetwork.LocalPlayer.IsMasterClient)
+	{
+		PhotonNetwork.InstantiateRoomObject(defaultObject.name, transform.parent.position, transform.parent.rotation);
+
+		PhotonNetwork.Destroy(photonView.transform.parent.gameObject);
+	}
+
+	.... // Scoring system implementations
+}
+										</code></pre>
+										<br>
+										
+										<li>A trapping mechanic for the human child to stop the cat's movement within a certain amount of time.</li>
+										<li>In the meantime on the cat's side, a prompt to escape appears for the player to fill the bar.</li>
+										<br>
+										<div class="box alt">
+											<div class="row gtr-50 gtr-uniform">
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/purr_trap.gif" alt="" /></span></div>
+											</div>
+										</div>
+										<br>
+
+										<pre><code>// Functions used for the human's mechanic button
+public void CaptureCat()
+{
+	if (TriggeringZone.instance.catInRange == true) // From a static class that detects how close the cat player is
+	{
+		trapNow = true;
+		photonView.RPC(nameof(TrapInstantiate), RpcTarget.AllBuffered);
+
+		.... // Button cool down event
+	}
+}
+										</code></pre>
+										<pre><code>[PunRPC]
+public void TrapInstantiate()
+{
+	if (catPlayer == null)
+		catPlayer = GameObject.FindGameObjectWithTag("Player");
+
+	Vector3 spawnLoc = new Vector3(catPlayer.transform.position.x, catPlayer.transform.position.y, catPlayer.transform.position.z);
+	Quaternion spawnRotation = Quaternion.Euler(-90, 0, 0);
+
+	if (PhotonNetwork.LocalPlayer.IsMasterClient)
+	{
+		PhotonNetwork.InstantiateRoomObject(trapPrefab.name, spawnLoc, spawnRotation);
+	}
+
+	CatTrappedScript.instance.trappingCat = true; 
+	EscapeSpamScript.instance.startEscaping = true; // Enables on the cat player's buttom spam canvas
+	trapNow = false;
+}
+										</code></pre>
+									</ul>
+
+									
+
+								
 								</section>
 
 						</div>
@@ -82,9 +160,7 @@
 										<li>
 											<span class="opener">Personals</span>
 											<ul>
-												<li><a href="lucid_horror.html">LUCID DREAM HORROR</a></li>
 												<li><a href="banjir_buddy.html">BANIJR BUDDY</a></li>
-												<li><a href="renpy_prac.html">RENPY PRACTICE</a></li>
 												<li><a href="mafia.html">WHO IS THE ONE</a></li>
 												
 											</ul>

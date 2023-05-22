@@ -35,19 +35,104 @@
 									<header class="main">
 									</header>
 
-									<span class="image main"><img src="media/personals/renpy.gif" alt="" /></span>
+									<span class="image main"><img src="media/projects/passage_banner.gif" alt="" /></span>
 									
-									<h2>Basic Description</h2>
-									
-									<p><b>GENRE:</b> _____ </p>
-									<p><b>PLATFORM:</b> _____ </p>
-									
-
+									<h2 id="content">Introduction</h2>
+										<p>A heavy-narrative game project made by 6 members, about a boy's travels to encounter various cultures while solving puzzles to bridge on different islands.
+											Created within ~1 year, I was tasked as the technical artist for both user interfaces and 3D graphics.</p>
+										<br>
+										<div class="row">
+											<div class="col-3 col-12-medium">
+												<h3>Platform</h3>
+												<p>Windows</p>
+											</div>
+											<div class="col-3 col-12-medium">
+												<h3>Engine</h3>
+												<p>Unity3D</p>
+											</div>
+											<div class="col-3 col-12-medium">
+												<h3>Genre</h3>
+												<p>Narrative, Puzzle</p>
+											</div>
+											<div class="col-3 col-12-medium">
+												<h3>Official Site</h3>
+												<p>TBA</p>
+												<!--<p><a href="https://uowmgames.itch.io/10000-meters-deep" target="_blank"> Direct link to game site</a></p>-->
+											</div>
+										</div>
 									<hr class="major" />
 
-									<h2>Introduction</h2>
-									<p>A study practice into understanding the mechanics of RenPY. I've been meaning to start a mini project of a visual novel and using <a href="mafia.html">"Who Is The One"</a>'s project is a startup to learning them!</p>
-									<p></p>
+									<h2>My Assigned Tasks</h2>
+									<ul>
+										<li>Created various particle effects to bring out the liveliness of each island and the main menu.</li>
+										<li>Various shaders are included in this project to enhance the theme's aesthetic.</li>
+										<ul>
+											<li>To fit the overall aesthetic of this game, I adapted a shader from a known game artist, <a href="https://minionsart.github.io/tutorials/" target="_blank">minionsart</a> with a few adjustments and additional nodes.</li>
+											<li>Water shader.</li>
+											<li>Crystallized shader.</li>
+											<li>Silhouette shader whenever the player is behind an object, using Unity URP's depth testing.</li>
+											<br>
+											<div class="box alt">
+												<div class="row gtr-50 gtr-uniform">
+													<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_silhoutte.gif" alt="" /></span></div>
+												</div>
+											</div>
+										</ul>
+
+										<li>Motion graphics on all user interfaces.</li>
+										<br>
+										<div class="box alt">
+											<div class="row gtr-50 gtr-uniform">
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_notify.gif" alt="" /></span></div>
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_terminal.gif" alt="" /></span></div>
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_main.gif" alt="" /></span></div>
+												
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_phone.gif" alt="" /></span></div>
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_glitch.gif" alt="" /></span></div>
+											</div>
+										</div>
+										<li>A swaying movement for all islands to look more alive and realistic, as all islands are floating above the surface. But instead of using the built-in animator, a script is written for better optimization.</li>
+										<br>
+										<pre><code>void Start()
+{
+	startPos = transform.rotation;
+}
+
+void Update()
+{
+	Quaternion rotate = startPos;
+	rotate.x += direction * (delta * Mathf.Sin(Time.time * speed)); 
+	// The direction represents the height of the arc to move
+	// Because the sin() function has a smoother and consistant wavelength, this is used to represent the movement of an island swaying
+
+	transform.rotation = rotate;
+}
+										</code></pre>
+										<br>
+
+										<li>This is also applied to the movements on live animals. In other words, the animals are scripted in a patrol manner.</li>
+										<br>
+										<pre><code>Transform corners = idleSpots[currentPos];
+if (Vector3.Distance(transform.position, corners.position) < 0.01f)
+{
+	transform.position = corners.position;
+	waitCounter = 0f; // Resetting the counter to start over
+	waiting = true;
+
+	currentPos = (currentPos + 1) % idleSpots.Length;
+}
+
+else
+{
+	transform.position = Vector3.MoveTowards(transform.position, corners.position, swimSpeed * Time.deltaTime);
+
+	// This is to make sure that all animals are facing towards the assigned patrolling areas
+	transform.LookAt(corners.position);
+
+	transform.rotation *= Quaternion.FromToRotation(Vector3.right, Vector3.forward);
+}
+										</code></pre>
+									</ul>
 								</section>
 
 						</div>
@@ -82,9 +167,7 @@
 										<li>
 											<span class="opener">Personals</span>
 											<ul>
-												<li><a href="lucid_horror.html">LUCID DREAM HORROR</a></li>
 												<li><a href="banjir_buddy.html">BANIJR BUDDY</a></li>
-												<li><a href="renpy_prac.html">RENPY PRACTICE</a></li>
 												<li><a href="mafia.html">WHO IS THE ONE</a></li>
 												
 											</ul>
