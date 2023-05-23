@@ -38,7 +38,7 @@
 									<span class="image main"><img src="media/projects/passage_banner.gif" alt="" /></span>
 									
 									<h2 id="content">Introduction</h2>
-										<p>A heavy-narrative game project made by 6 members, about a boy's travels to encounter various cultures while solving puzzles to bridge on different islands.
+										<p>A heavy-narrative game project made by 6 members, about a boy's travels to encounter various cultures while solving puzzles to bridge on different islands in a 2D/3D environment.
 											Created within ~1 year, I was tasked as the technical artist for both user interfaces and 3D graphics.</p>
 										<br>
 										<div class="row">
@@ -65,20 +65,17 @@
 									<h2>My Assigned Tasks</h2>
 									<ul>
 										<li>Created various particle effects to bring out the liveliness of each island and the main menu.</li>
-										<li>Various shaders are included in this project to enhance the theme's aesthetic.</li>
-										<ul>
-											<li>To fit the overall aesthetic of this game, I adapted a shader from a known game artist, <a href="https://minionsart.github.io/tutorials/" target="_blank">minionsart</a> with a few adjustments and additional nodes.</li>
-											<li>Water shader.</li>
-											<li>Crystallized shader.</li>
-											<li>Silhouette shader whenever the player is behind an object, using Unity URP's depth testing.</li>
-											<br>
-											<div class="box alt">
-												<div class="row gtr-50 gtr-uniform">
-													<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_silhoutte.gif" alt="" /></span></div>
-												</div>
+										<br>
+										<div class="box alt">
+											<div class="row gtr-50 gtr-uniform">
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_mainmenu_particle.gif" alt="" /></span></div>
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_fireflies.gif" alt="" /></span></div>
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_particles.gif" alt="" /></span></div>
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_sprinkler.gif" alt="" /></span></div>
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_spray.gif" alt="" /></span></div>
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_calla_teleport.gif" alt="" /></span></div>
 											</div>
-										</ul>
-
+										</div>
 										<li>Motion graphics on all user interfaces.</li>
 										<br>
 										<div class="box alt">
@@ -86,32 +83,35 @@
 												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_notify.gif" alt="" /></span></div>
 												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_terminal.gif" alt="" /></span></div>
 												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_main.gif" alt="" /></span></div>
-												
 												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_phone.gif" alt="" /></span></div>
 												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_glitch.gif" alt="" /></span></div>
 											</div>
 										</div>
 										<li>A swaying movement for all islands to look more alive and realistic, as all islands are floating above the surface. But instead of using the built-in animator, a script is written for better optimization.</li>
 										<br>
-										<pre><code>void Start()
-{
-	startPos = transform.rotation;
-}
-
-void Update()
+										<div class="box alt">
+											<div class="row gtr-50 gtr-uniform">
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_island_sway.gif" alt="" /></span></div>
+											</div>
+										</div>
+										<pre><code>void Update()
 {
 	Quaternion rotate = startPos;
 	rotate.x += direction * (delta * Mathf.Sin(Time.time * speed)); 
-	// The direction represents the height of the arc to move
+	// The delta represents the height of the arc to move
 	// Because the sin() function has a smoother and consistant wavelength, this is used to represent the movement of an island swaying
 
 	transform.rotation = rotate;
-}
-										</code></pre>
+}										</code></pre>
 										<br>
-
-										<li>This is also applied to the movements on live animals. In other words, the animals are scripted in a patrol manner.</li>
+										<li>This is also applied to the movements on live fishes. 
+											In other words, the fishes are scripted in a patrol manner. The duck's movement is adapted from the island swaying movement.</li>
 										<br>
+										<div class="box alt">
+											<div class="row gtr-50 gtr-uniform">
+												<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_fish_duck.gif" alt="" /></span></div>
+											</div>
+										</div>
 										<pre><code>Transform corners = idleSpots[currentPos];
 if (Vector3.Distance(transform.position, corners.position) < 0.01f)
 {
@@ -130,8 +130,29 @@ else
 	transform.LookAt(corners.position);
 
 	transform.rotation *= Quaternion.FromToRotation(Vector3.right, Vector3.forward);
-}
-										</code></pre>
+}										</code></pre>
+										<br>
+										<li>Various shaders are included in this project to enhance the theme's aesthetic.</li>
+										<ul>
+											<li>Overall shader.</li>
+											<li>Water shader.</li>
+											<li>Crystallized shader.</li>
+											<li>Silhouette shader whenever the player is behind an object, using Unity URP's depth testing.</li>
+											<br>
+											<div class="box alt">
+												<div class="row gtr-50 gtr-uniform">
+													<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_shader_light.gif" alt="" /></span></div>
+													<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_water.gif" alt="" /></span></div>
+													<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_crystal.jpg" alt="" /></span></div>
+													<div class="col-4"><span class="image fit"><img src="media/projects/content/pass_silhoutte.gif" alt="" /></span></div>
+												</div>
+											</div>
+											<li>To fit the overall aesthetic of this game, I adapted a shader from a known game artist, <a href="https://minionsart.github.io/tutorials/" target="_blank">minionsart</a> with a few adjustments and additional nodes.</li>
+											<br>
+											<span class="img"><img src="media/projects/content/pass_shader1.jpg"  width="700" alt="" /></span>
+											<span class="img"><img src="media/projects/content/pass_shader2.jpg" width="700" alt="" /></span>
+											<span class="img"><img src="media/projects/content/pass_shader3.jpg" width="700" alt="" /></span>
+										</ul>
 									</ul>
 								</section>
 
